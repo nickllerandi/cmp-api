@@ -10,6 +10,8 @@ var app = express();
 
 app.use(bodyParser.json());
 
+// TODOs
+
 app.post("/todos", (req, res) => {
     var todo = new Todo({
         text: req.body.text
@@ -22,6 +24,16 @@ app.post("/todos", (req, res) => {
     });
 });
 
+app.get("/todos", (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({todos});
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
+
+// FIOSCMP
+
 app.post("/fioscmp", (req, res) => {
     var fioscmp = new FiosCmp({
         tactic: req.body.tactic,
@@ -30,6 +42,14 @@ app.post("/fioscmp", (req, res) => {
 
     fioscmp.save().then((doc) => {
         res.send(doc);
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
+
+app.get("/fioscmp", (req, res) => {
+    FiosCmp.find().then((cmps) => {
+        res.send({cmps});
     }, (e) => {
         res.status(400).send(e);
     });

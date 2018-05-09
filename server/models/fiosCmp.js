@@ -9,7 +9,7 @@ var FiosCmp = mongoose.model("FiosCmp", {
     },
     lob: {
         type: String,
-        required: true,
+        default: "incomplete",
         minLength: 1,
         trim: true
     }
